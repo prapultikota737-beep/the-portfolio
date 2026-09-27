@@ -20,8 +20,19 @@ import {
 import { useEffect, useState, type CSSProperties, type FormEvent, type MouseEvent as ReactMouseEvent } from "react";
 
 import heroImage from "@/assets/prapul-cinematic-hero.webp";
+import heroImage720 from "@/assets/prapul-cinematic-hero-720.webp";
+import heroImage1080 from "@/assets/prapul-cinematic-hero-1080.webp";
+import socialPreview from "@/assets/prapul-social-preview.jpg.asset.json";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -36,6 +47,9 @@ const PROJECTS = [
     url: "https://github.com/prapultikota737-beep/StudyPilot-AI",
     detail:
       "A practical exploration of AI-assisted learning. Visit the repository for the verified source, current implementation, and project documentation.",
+    role: "To be added",
+    process: "To be added",
+    outcomes: "To be added",
   },
   {
     number: "02",
@@ -45,6 +59,9 @@ const PROJECTS = [
     url: "https://github.com/prapultikota737-beep/ResumeAIAnalyzer",
     detail:
       "A focused platform for AI-assisted resume analysis and improvement. Visit the repository for the verified source and current project details.",
+    role: "To be added",
+    process: "To be added",
+    outcomes: "To be added",
   },
 ] as const;
 
@@ -64,6 +81,7 @@ const SKILLS = [
 
 const GITHUB_URL = "https://github.com/prapultikota737-beep";
 const LINKEDIN_URL = "https://www.linkedin.com/in/prapul-rajakumar-tikota-5733a1385";
+const SOCIAL_PREVIEW_URL = `https://id-preview--a1cdd8e0-5a79-447c-a9d2-d52892bfda66.lovable.app${socialPreview.url}`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -81,9 +99,34 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { property: "og:site_name", content: "Prapul Rajakumar Tikota" },
+      { property: "og:image", content: SOCIAL_PREVIEW_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Prapul Rajakumar Tikota in a cinematic technology exploration scene" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Prapul Rajakumar Tikota — Explorer of Technology" },
+      {
+        name: "twitter:description",
+        content: "Exploring technology, building intelligence, and creating impact through AI and data science.",
+      },
+      { name: "twitter:image", content: SOCIAL_PREVIEW_URL },
+      { name: "twitter:image:alt", content: "Prapul Rajakumar Tikota in a cinematic technology exploration scene" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Prapul Rajakumar Tikota",
+          description: "B.Tech Artificial Intelligence & Data Science student at REVA University, Bangalore.",
+          affiliation: { "@type": "CollegeOrUniversity", name: "REVA University" },
+          sameAs: [GITHUB_URL, LINKEDIN_URL],
+        }),
+      },
+    ],
   }),
   component: Portfolio,
 });
@@ -202,9 +245,15 @@ function Portfolio() {
       <section id="home" className="relative flex min-h-[920px] items-end overflow-hidden pt-20 md:min-h-screen" aria-labelledby="hero-title">
         <img
           src={heroImage}
+          srcSet={`${heroImage720} 720w, ${heroImage1080} 1080w, ${heroImage} 1264w`}
+          sizes="100vw"
           alt="Prapul Rajakumar Tikota overlooking an ocean horizon with Earth, an aircraft, and Indian stone architecture"
+          width={1264}
+          height={848}
           className="hero-image absolute inset-0 h-full w-full object-cover object-[67%_center] md:object-center"
           fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         <div className="hero-shade absolute inset-0" />
         <div className="stars absolute inset-0 opacity-55" aria-hidden="true" />
@@ -318,9 +367,38 @@ function Portfolio() {
                     <Button asChild variant="outline" className="rounded-none">
                       <a href={project.url} target="_blank" rel="noreferrer"><Github /> GitHub</a>
                     </Button>
-                    <Button asChild className="rounded-none">
-                      <a href={project.url} target="_blank" rel="noreferrer">View project <ArrowUpRight /></a>
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button className="rounded-none">View project <ArrowUpRight /></Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-h-[90dvh] max-w-3xl overflow-y-auto rounded-none border-border bg-background p-0">
+                        <div className="border-b border-border bg-card/70 p-7 sm:p-10">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Project {project.number} · Detail view</p>
+                          <DialogHeader className="mt-5 pr-8">
+                            <DialogTitle className="font-display text-3xl leading-tight sm:text-5xl">{project.title}</DialogTitle>
+                            <DialogDescription className="pt-3 text-base leading-7">{project.description}</DialogDescription>
+                          </DialogHeader>
+                        </div>
+                        <div className="grid gap-px bg-border sm:grid-cols-3">
+                          {([
+                            ["Role", project.role],
+                            ["Process", project.process],
+                            ["Outcomes", project.outcomes],
+                          ] as const).map(([label, value]) => (
+                            <section key={label} className="bg-background p-6 sm:min-h-44">
+                              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">{label}</p>
+                              <p className="mt-5 text-sm leading-6 text-muted-foreground">{value}</p>
+                            </section>
+                          ))}
+                        </div>
+                        <div className="flex flex-col gap-5 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+                          <p className="max-w-md text-sm leading-6 text-muted-foreground">{project.detail}</p>
+                          <Button asChild className="shrink-0 rounded-none">
+                            <a href={project.url} target="_blank" rel="noreferrer">Open repository <Github /></a>
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </article>
