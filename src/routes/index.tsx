@@ -137,6 +137,7 @@ function Portfolio() {
 
   return (
     <main className="min-h-screen overflow-x-clip bg-background text-foreground selection:bg-primary/30">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled || menuOpen ? "border-b border-border bg-background/88 backdrop-blur-xl" : "bg-transparent"}`}
       >
@@ -198,7 +199,7 @@ function Portfolio() {
         )}
       </header>
 
-      <section id="home" className="relative flex min-h-[920px] items-end overflow-hidden pt-20 md:min-h-screen">
+      <section id="home" className="relative flex min-h-[920px] items-end overflow-hidden pt-20 md:min-h-screen" aria-labelledby="hero-title">
         <img
           src={heroImage}
           alt="Prapul Rajakumar Tikota overlooking an ocean horizon with Earth, an aircraft, and Indian stone architecture"
@@ -222,7 +223,7 @@ function Portfolio() {
             <p className="mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-primary sm:text-xs">
               <span className="h-px w-10 bg-primary" /> Explorer of technology
             </p>
-            <h1 className="font-display text-[clamp(3.15rem,8vw,7.6rem)] font-semibold uppercase leading-[0.84] text-foreground">
+            <h1 id="hero-title" className="font-display text-[clamp(3.15rem,8vw,7.6rem)] font-semibold uppercase leading-[0.84] text-foreground">
               Prapul
               <span className="block text-stroke">Rajakumar</span>
               <span className="block">Tikota</span>
@@ -258,6 +259,7 @@ function Portfolio() {
         <div className="ocean-line absolute inset-x-0 bottom-0 h-6" aria-hidden="true" />
       </section>
 
+      <div id="main-content" tabIndex={-1}>
       <section id="about" className="section-shell relative border-b border-border" data-reveal>
         <div className="mx-auto grid max-w-[1360px] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24 lg:px-14">
           <SectionHeading number="01" eyebrow="Coordinates" title="About" />
@@ -439,6 +441,7 @@ function Portfolio() {
           </div>
         </div>
       </section>
+      </div>
 
       <footer className="border-t border-border bg-card/40">
         <div className="mx-auto flex max-w-[1360px] flex-col gap-5 px-5 py-8 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-10 lg:px-14">
