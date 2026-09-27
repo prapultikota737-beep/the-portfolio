@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Keep the portfolio as a single anchored journey; content lives in data arrays so skills and projects remain easy to edit. Why: the requested experience depends on continuous cinematic scrolling and maintainable factual content.
