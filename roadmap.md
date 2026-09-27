@@ -6,4 +6,4 @@
 - [x] Add verified social links and honest contact/resume states
 - [x] Add route metadata and accessibility details
 - [x] Complete final desktop and mobile interaction review
-- [ ] Verify keyboard navigation, visible focus states, and reduced-motion behavior
+- [x] Verify keyboard navigation, visible focus states, and reduced-motion behavior
