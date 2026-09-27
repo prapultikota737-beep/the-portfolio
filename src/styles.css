@@ -92,7 +92,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 767px) {
   .hero-shade { background: linear-gradient(0deg, var(--background) 2%, oklch(0.075 0.025 252 / 0.88) 46%, oklch(0.075 0.025 252 / 0.18) 100%); }
   .hero-image { object-position: 69% center; }
-  .skill-node { padding-inline: 0.45rem; font-size: 0.55rem; max-width: 6.2rem; }
+  .skill-node { left: var(--mobile-left) !important; top: var(--mobile-top) !important; padding-inline: 0.45rem; font-size: 0.55rem; max-width: 6.2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

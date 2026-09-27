@@ -17,7 +17,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { useEffect, useState, type FormEvent, type MouseEvent as ReactMouseEvent } from "react";
+import { useEffect, useState, type CSSProperties, type FormEvent, type MouseEvent as ReactMouseEvent } from "react";
 
 import heroImage from "@/assets/prapul-cinematic-hero.webp";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -347,8 +347,20 @@ function Portfolio() {
                 const radius = index % 2 === 0 ? 43 : 35;
                 const left = 50 + Math.cos(angle) * radius;
                 const top = 50 + Math.sin(angle) * radius;
+                const mobileLeft = Math.min(83, Math.max(17, left));
+                const mobileTop = Math.min(92, Math.max(8, top));
                 return (
-                  <span key={skill} className="skill-node absolute -translate-x-1/2 -translate-y-1/2 border border-border bg-card px-3 py-2 text-center font-mono text-[10px] uppercase tracking-[0.08em] text-foreground shadow-lg sm:px-4 sm:text-xs" style={{ left: `${left}%`, top: `${top}%`, animationDelay: `${index * -0.35}s` }}>
+                  <span
+                    key={skill}
+                    className="skill-node absolute -translate-x-1/2 -translate-y-1/2 border border-border bg-card px-3 py-2 text-center font-mono text-[10px] uppercase tracking-[0.08em] text-foreground shadow-lg sm:px-4 sm:text-xs"
+                    style={{
+                      left: `${left}%`,
+                      top: `${top}%`,
+                      animationDelay: `${index * -0.35}s`,
+                      "--mobile-left": `${mobileLeft}%`,
+                      "--mobile-top": `${mobileTop}%`,
+                    } as CSSProperties}
+                  >
                     {skill}
                   </span>
                 );
