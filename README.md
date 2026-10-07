@@ -52,6 +52,10 @@ Description: AI-powered resume analysis and improvement platform.
 GitHub:
 https://github.com/prapultikota737-beep/ResumeAIAnalyzer
 
+PROJECT 3:
+ENTERPRISE NETWORK DESIGN & SIMULATION
+Description: Enterprise Network Design and Simulation using Cisco Packet Tracer, featuring VLANs, IP addressing, router-on-a-stick inter-VLAN routing, and network connectivity testing.
+
 Each project card should have:
 - Project title
 - Short description
